@@ -4,6 +4,7 @@ import lombok.*;
 import java.util.Currency;
 import java.util.UUID;
 
+@Component
 @Setter
 @Getter
 @ToString
