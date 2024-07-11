@@ -1,7 +1,7 @@
 package dao;
 
 import java.util.List;
-public interface dao<T>{
+public interface Dao<T>{
     T save(T obj);
 
     boolean delete(T obj);

@@ -1,5 +1,6 @@
 package model;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 import java.util.UUID;
