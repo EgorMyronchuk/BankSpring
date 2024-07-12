@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Arrays.stream;
+
 @Repository
 public class AccountDao implements Dao<Account> {
 
@@ -49,5 +53,12 @@ public class AccountDao implements Dao<Account> {
     @Override
     public Account getOne(long id) {
         return accounts.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+    }
+
+    public Optional<Account> findByNumber (String number) {
+        return accounts
+                .stream()
+                .filter(x -> x.getNumber().equals(number))
+                .findFirst();
     }
 }
