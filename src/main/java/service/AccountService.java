@@ -17,16 +17,14 @@ public class AccountService {
                 .stream()
                 .filter(x -> x.getNumber().equals(accountNumber))
                 .findFirst();
-
         if (account.isPresent()) {
             Double balance = account.get().getBalance();
             account.get().setBalance(balance + amount);
             accountDao.save(account.get());
         }
-        else ()
-
-
+        return account;
     }
+
 
 
 
