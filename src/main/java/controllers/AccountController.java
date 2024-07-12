@@ -2,11 +2,12 @@ package controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import service.AccountSevice;
+import org.springframework.web.bind.annotation.RestController;
+import service.AccountService;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class AccountController {
 
-    private final AccountSevice accountService;
+    private final AccountService accountService;
 }

@@ -13,6 +13,10 @@ public class CustomerDao implements Dao<Customer> {
 
     @Override
     public Customer save(Customer obj) {
+        if (customers.contains(obj)) {
+           customers.set(customers.indexOf(obj) , obj);
+           return obj;
+        }
         obj.setId(customers.getLast().getId() + 1);
         customers.add(obj);
         return obj;

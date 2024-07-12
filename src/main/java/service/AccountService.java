@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AccountSevice {
-
+public class AccountService {
     private final AccountDao accountDao;
+
+    public void deposit(String accountNumber , Double amount) {
+
+    }
 }

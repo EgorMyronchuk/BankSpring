@@ -12,6 +12,10 @@ public class AccountDao implements Dao<Account> {
 
     @Override
     public Account save(Account obj) {
+        if (accounts.contains(obj)) {
+            accounts.set(accounts.indexOf(obj) , obj);
+            return obj;
+        }
         obj.setId(accounts.getLast().getId() + 1);
         accounts.add(obj);
         return obj;
