@@ -17,7 +17,7 @@ public class CustomerDao implements Dao<Customer> {
            customers.set(customers.indexOf(obj) , obj);
            return obj;
         }
-        obj.setId(customers.getLast().getId() + 1);
+        obj.setId(customers.get(customers.size() - 1).getId() + 1);
         customers.add(obj);
         return obj;
     }
@@ -29,7 +29,7 @@ public class CustomerDao implements Dao<Customer> {
 
     @Override
     public void deleteAll(List<Customer> entities) {
-        customers.removeAll(entities);
+       entities.forEach(this::save);
     }
 
     @Override

@@ -1,12 +1,11 @@
 package service;
 
+
 import dao.CustomerDao;
 import lombok.RequiredArgsConstructor;
-import model.Account;
 import model.Customer;
 import org.springframework.stereotype.Service;
 
-import java.util.Currency;
 import java.util.List;
 
 @Service
@@ -16,11 +15,18 @@ public class CustomerService {
     private final CustomerDao customerDao;
 
     public Customer getCustomerById(Long id) {
+        if (customerDao.getOne(id) == null) {
+
+       }
         return customerDao.getOne(id);
     }
 
     public List<Customer> getAllCustomers() {
-        return customerDao.findAll();
+        List<Customer> mylist = customerDao.findAll();;
+        if (mylist.size() == 0) {
+            throw
+        }
+        return mylist;
     }
 
     public void saveCustomer(Customer customer) {

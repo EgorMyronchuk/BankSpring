@@ -20,7 +20,7 @@ public class AccountDao implements Dao<Account> {
             accounts.set(accounts.indexOf(obj) , obj);
             return obj;
         }
-        obj.setId(accounts.getLast().getId() + 1);
+        obj.setId(accounts.get(accounts.size() - 1).getId() + 1);
         accounts.add(obj);
         return obj;
     }

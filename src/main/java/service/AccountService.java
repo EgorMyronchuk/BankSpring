@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import model.Account;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -25,29 +27,36 @@ public class AccountService {
         return account;
     }
 
-    public Boolean withdraw (String accountNumber , Double amount) {
+    public Optional<Account> withdraw (String accountNumber , Double amount) {
         Function<Account , Boolean> enoughBalance = x -> x.getBalance() >= amount;
         Optional<Account> accountopt = accountDao.findByNumber(accountNumber);
         if (accountopt.isEmpty()) {
-            return false;
+            return Optional.empty();
         }
         Account account = accountopt.get();
         if (enoughBalance.apply(account))  {
             account.setBalance(account.getBalance() - amount);
             accountDao.save(account);
-            return true;
+            return accountopt;
         }
-        return false;
+        return Optional.empty();
     }
 
-    public Boolean transfer (String accountFromNumber , String accountToNumber , Double amount) {
-        if (accountDao.findByNumber(accountFromNumber).isEmpty() || accountDao.findByNumber(accountToNumber).isEmpty()) {
-            return false;
+    public Optional<List<Account>> transfer(String accountFromNumber, String accountToNumber, Double amount) {
+        Optional<Account> fromAccount = accountDao.findByNumber(accountFromNumber);
+        Optional<Account> toAccount = accountDao.findByNumber(accountToNumber);
+
+        if (fromAccount.isEmpty() || toAccount.isEmpty()) {
+            return Optional.empty();
         }
-        if (withdraw(accountFromNumber, amount)) {
+        if (withdraw(accountFromNumber, amount).isPresent()) {
             deposit(accountToNumber, amount);
-            return true;
+            List<Account> accounts = new ArrayList<>();
+            accounts.add(fromAccount.get());
+            accounts.add(toAccount.get());
+            return Optional.of(accounts);
         }
-        return false;
+        return Optional.empty();
     }
+
 }
