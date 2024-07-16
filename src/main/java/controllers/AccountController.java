@@ -22,26 +22,26 @@ public class AccountController {
             ResponseEntity.notFound().build();
 
     @PostMapping("deposit")
-    public ResponseEntity<?> deposit (String cardNumber , Double amount) {
+    public ResponseEntity<?> deposit (@RequestParam String cardNumber ,@RequestParam  Double amount) {
       Optional<Account> account = accountService.deposit(cardNumber , amount);
 
       if (account.isPresent()) return ResponseEntity.status(HttpStatus.OK).body(account.get());
-      else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card by this number not find");
+      else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card with this number not found");
     }
 
     @PostMapping("withdraw")
-    public ResponseEntity<?> withdraw (String cardNumber , Double amount) {
+    public ResponseEntity<?> withdraw (@RequestParam String cardNumber ,@RequestParam  Double amount) {
         Optional<Account> account = accountService.withdraw(cardNumber , amount);
 
         if (account.isPresent()) return ResponseEntity.status(HttpStatus.OK).body(account.get());
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card by this number not find");
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card with this number not found");
     }
 
     @PostMapping("transfer")
-    public ResponseEntity<?> transfer (String cardNumberFrom , String cardNumberTo , Double amount) {
+    public ResponseEntity<?> transfer (@RequestParam String cardNumberFrom ,@RequestParam  String cardNumberTo ,@RequestParam  Double amount) {
         Optional<List<Account>> account = accountService.transfer(cardNumberFrom, cardNumberTo , amount);
         if (account.isPresent()) return ResponseEntity.status(HttpStatus.OK).body(account.get());
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card by this number not find or Not enough money to transfer");
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card with this number not found or Not enough money to transfer");
     }
 
 

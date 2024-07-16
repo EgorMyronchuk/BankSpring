@@ -1,10 +1,13 @@
 package service;
 
 
+import CustomException.EntityNotFoundException;
 import dao.CustomerDao;
 import lombok.RequiredArgsConstructor;
+import model.Account;
 import model.Customer;
 import org.springframework.stereotype.Service;
+import utils.CustomCurrency;
 
 import java.util.List;
 
@@ -16,15 +19,15 @@ public class CustomerService {
 
     public Customer getCustomerById(Long id) {
         if (customerDao.getOne(id) == null) {
-
+            throw new EntityNotFoundException("No Customer by id : " + id);
        }
         return customerDao.getOne(id);
     }
 
     public List<Customer> getAllCustomers() {
         List<Customer> mylist = customerDao.findAll();;
-        if (mylist.size() == 0) {
-            throw
+        if (mylist.isEmpty()) {
+            throw new EntityNotFoundException("No Customer found");
         }
         return mylist;
     }
@@ -38,15 +41,21 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Long id) {
-        customerDao.deleteById(id);
+        if (!customerDao.deleteById(id)) throw new EntityNotFoundException("No Customer by id : " + id);
     }
 
-    public void createAccountForCustomer(Long id , Currency currency) {
+    public void createAccountForCustomer(Long id , CustomCurrency currency) {
        Customer customer = customerDao.getOne(id);
+        if (customerDao.getOne(id) == null) throw new EntityNotFoundException("No Customer by id : " + id);
+
         customer.getAccounts().add(new Account(currency , customer));
     }
 
     public void deleteAccountForCustomer(Long id , Account account ) {
-        customerDao.getOne(id).getAccounts().remove(account);
+        Customer customer = customerDao.getOne(id);
+        if (customerDao.getOne(id) == null)  throw new EntityNotFoundException("No Customer by id : " + id);
+        if (!customer.getAccounts().remove(account)) {
+            throw new EntityNotFoundException("Not found this Account : " + account);
+        }
     }
 }

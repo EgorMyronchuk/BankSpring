@@ -1,6 +1,6 @@
 package utils;
 
-public enum Currency {
+public enum CustomCurrency {
     USD,
     EURO,
     UAH,

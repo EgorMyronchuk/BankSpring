@@ -1,8 +1,9 @@
 package model;
 import lombok.*;
 import org.springframework.stereotype.Component;
+import utils.CustomCurrency;
 
-import java.util.Currency;
+
 import java.util.UUID;
 
 @Component
@@ -13,10 +14,10 @@ import java.util.UUID;
 public class Account {
     private Long id;
     private String number;
-    private Currency currency;
+    private CustomCurrency currency;
     private Double balance;
     private Customer customer;
-    public Account(Currency currency, Customer customer) {
+    public Account(CustomCurrency currency, Customer customer) {
         this.currency = currency;
         this.customer = customer;
         this.balance = 0.0;

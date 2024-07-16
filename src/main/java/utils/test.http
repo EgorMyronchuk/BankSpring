@@ -1,2 +1,2 @@
 ### GET request to example server
-GET http://localhost:8080/account
+GET http://localhost:9000/customers
