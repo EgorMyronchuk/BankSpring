@@ -1,12 +1,13 @@
-package model;
+package app.model;
+
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import utils.CustomCurrency;
+import app.utils.CustomCurrency;
 
 
 import java.util.UUID;
 
-@Component
 @Setter
 @Getter
 @ToString
@@ -17,6 +18,8 @@ public class Account {
     private CustomCurrency currency;
     private Double balance;
     private Customer customer;
+
+
     public Account(CustomCurrency currency, Customer customer) {
         this.currency = currency;
         this.customer = customer;

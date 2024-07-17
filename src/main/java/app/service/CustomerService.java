@@ -1,13 +1,13 @@
-package service;
+package app.service;
 
 
-import CustomException.EntityNotFoundException;
-import dao.CustomerDao;
+import app.CustomException.EntityNotFoundException;
+import app.dao.CustomerDao;
 import lombok.RequiredArgsConstructor;
-import model.Account;
-import model.Customer;
+import app.model.Account;
+import app.model.Customer;
 import org.springframework.stereotype.Service;
-import utils.CustomCurrency;
+import app.utils.CustomCurrency;
 
 import java.util.List;
 

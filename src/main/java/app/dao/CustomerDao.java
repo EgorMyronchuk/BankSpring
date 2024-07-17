@@ -1,7 +1,7 @@
-package dao;
+package app.dao;
 
 
-import model.Customer;
+import app.model.Customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -13,6 +13,9 @@ public class CustomerDao implements Dao<Customer> {
 
     @Override
     public Customer save(Customer obj) {
+        if (customers.size() == 0) {
+            c
+        }
         if (customers.contains(obj)) {
            customers.set(customers.indexOf(obj) , obj);
            return obj;

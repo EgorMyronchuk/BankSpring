@@ -1,12 +1,12 @@
-package controllers;
+package app.controllers;
 
 import lombok.RequiredArgsConstructor;
-import model.Account;
+import app.model.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.AccountService;
+import app.service.AccountService;
 
 import java.util.List;
 import java.util.Optional;

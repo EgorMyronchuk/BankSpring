@@ -1,11 +1,11 @@
-package controllers;
+package app.controllers;
 
 import lombok.RequiredArgsConstructor;
-import model.Account;
-import model.Customer;
+import app.model.Account;
+import app.model.Customer;
 import org.springframework.web.bind.annotation.*;
-import service.CustomerService;
-import utils.CustomCurrency;
+import app.service.CustomerService;
+import app.utils.CustomCurrency;
 
 
 import java.util.List;

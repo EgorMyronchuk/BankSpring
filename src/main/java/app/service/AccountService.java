@@ -1,8 +1,8 @@
-package service;
+package app.service;
 
-import dao.AccountDao;
+import app.dao.AccountDao;
 import lombok.RequiredArgsConstructor;
-import model.Account;
+import app.model.Account;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

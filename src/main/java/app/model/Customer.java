@@ -1,11 +1,11 @@
-package model;
+package app.model;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@Component
+
 @Setter
 @Getter
 @ToString

@@ -1,6 +1,6 @@
-package dao;
+package app.dao;
 
-import model.Account;
+import app.model.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

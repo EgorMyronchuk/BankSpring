@@ -1,4 +1,4 @@
-package CustomException;
+package app.CustomException;
 
 public class AppError {
     private int statusCode;
