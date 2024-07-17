@@ -1,10 +1,13 @@
 package app.dao;
 
+import app.CustomException.EntityNotFoundException;
 import app.model.Account;
+import app.model.Customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.Arrays.stream;
@@ -16,12 +19,21 @@ public class AccountDao implements Dao<Account> {
 
     @Override
     public Account save(Account obj) {
-        if (accounts.contains(obj)) {
-            accounts.set(accounts.indexOf(obj) , obj);
-            return obj;
+        if (accounts.isEmpty()) {
+            obj.setId(0L);
+        }else {
+            obj.setId(accounts.get(accounts.size() - 1).getId() + 1L);
+            accounts.add(obj);
         }
-        obj.setId(accounts.get(accounts.size() - 1).getId() + 1);
-        accounts.add(obj);
+        return obj;
+    }
+
+    public Account update(Account obj) {
+        Account indexOfPrevObj = accounts.stream()
+                .filter(x -> Objects.equals(x.getId(), obj.getId()))
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("No Customer by id : "));
+        accounts.set(accounts.indexOf(indexOfPrevObj) , obj);
         return obj;
     }
 

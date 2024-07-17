@@ -1,11 +1,14 @@
 package app.dao;
 
 
+import app.CustomException.EntityNotFoundException;
 import app.model.Customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Repository
 public class CustomerDao implements Dao<Customer> {
 
@@ -13,15 +16,21 @@ public class CustomerDao implements Dao<Customer> {
 
     @Override
     public Customer save(Customer obj) {
-        if (customers.size() == 0) {
-            c
+        if (customers.isEmpty()) {
+            obj.setId(0L);
+        }else {
+            obj.setId(customers.get(customers.size() - 1).getId() + 1L);
         }
-        if (customers.contains(obj)) {
-           customers.set(customers.indexOf(obj) , obj);
-           return obj;
-        }
-        obj.setId(customers.get(customers.size() - 1).getId() + 1);
         customers.add(obj);
+        return obj;
+    }
+
+    public Customer update(Customer obj) {
+        Customer indexOfPrevObj = customers.stream()
+                .filter(x -> Objects.equals(x.getId(), obj.getId()))
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("No Customer by id : "));
+        customers.set(customers.indexOf(indexOfPrevObj) , obj);
         return obj;
     }
 

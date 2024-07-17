@@ -22,7 +22,7 @@ public class AccountService {
         if (account.isPresent()) {
             Double balance = account.get().getBalance();
             account.get().setBalance(balance + amount);
-            accountDao.save(account.get());
+            accountDao.update(account.get());
         }
         return account;
     }
@@ -36,7 +36,7 @@ public class AccountService {
         Account account = accountopt.get();
         if (enoughBalance.apply(account))  {
             account.setBalance(account.getBalance() - amount);
-            accountDao.save(account);
+            accountDao.update(account);
             return accountopt;
         }
         return Optional.empty();

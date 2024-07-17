@@ -29,15 +29,17 @@ public class CustomerService {
         if (mylist.isEmpty()) {
             throw new EntityNotFoundException("No Customer found");
         }
+        System.out.println(customerDao.findAll());
         return mylist;
     }
 
     public void saveCustomer(Customer customer) {
         customerDao.save(customer);
+        System.out.println(customerDao.findAll());
     }
 
     public void changeCustomer(Customer customer) {
-        customerDao.save(customer);
+        customerDao.update(customer);
     }
 
     public void deleteCustomer(Long id) {
